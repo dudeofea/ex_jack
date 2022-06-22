@@ -99,6 +99,14 @@ pub fn _start(env: Env, config: Config) -> StartResult {
                 .as_client()
                 .connect_ports_by_name(&format!("{}:out", config.name), "system:playback_2")
                 .unwrap();
+	        active_client
+	            .as_client()
+	            .connect_ports_by_name("system:capture_1", &format!("{}:in", config.name))
+	            .unwrap();
+	        active_client
+	            .as_client()
+	            .connect_ports_by_name("system:capture_2", &format!("{}:in", config.name))
+	            .unwrap();
         }
 
         let ten_seconds = time::Duration::from_secs(10);
